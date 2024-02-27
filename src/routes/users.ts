@@ -41,7 +41,7 @@ router.post(
         maxAge: 86400000,
       });
 
-      return res.status(200).send("User Registered Successfully");
+      return res.status(200).json({ message: "User Registered Successfully" });
     } catch (error) {
       console.log("Error in registering: " + error);
     }
