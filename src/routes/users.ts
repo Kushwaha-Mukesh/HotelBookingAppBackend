@@ -3,6 +3,7 @@ import User from "../models/user";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
+import verifyToken from "../middleware/verifyToken";
 const router = express.Router();
 
 router.post(
@@ -93,5 +94,17 @@ router.post(
     }
   }
 );
+
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+  res.status(200).json({ userId: req.userId });
+});
+
+router.get("/logout", (req: Request, res: Response) => {
+  res
+    .cookie("token", "", {
+      expires: new Date(0),
+    })
+    .json({ message: "Logout Successfully" });
+});
 
 export default router;
