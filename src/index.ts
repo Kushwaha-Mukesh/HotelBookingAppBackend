@@ -6,6 +6,7 @@ import userRoutes from "./routes/users";
 import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 import myHotelsRoutes from "./routes/my-hotels";
+import hotelSearch from "./routes/hotels";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -37,6 +38,7 @@ app.use(
 
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
+app.use("/api/hotels", hotelSearch);
 
 app.listen(7000, () => {
   console.log("server is listening on localhost:7000");
