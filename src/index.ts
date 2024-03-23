@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 import myHotelsRoutes from "./routes/my-hotels";
 import hotelSearch from "./routes/hotels";
+import path from "path";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -31,6 +32,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
