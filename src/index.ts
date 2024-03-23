@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 import myHotelsRoutes from "./routes/my-hotels";
 import hotelSearch from "./routes/hotels";
-import path from "path";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -28,12 +27,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "*",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
     credentials: true,
   })
 );
-
-app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
