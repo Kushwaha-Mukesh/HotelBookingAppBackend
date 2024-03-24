@@ -27,8 +27,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+    origin: [
+      "https://findyournextstay.netlify.app",
+      "https://hotelbookingappbackend-qpsb.onrender.com",
+      "http://localhost:5173",
+    ],
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS",
     credentials: true,
   })
 );
