@@ -107,4 +107,19 @@ router.get("/logout", (req: Request, res: Response) => {
     .json({ message: "Logout Successfully" });
 });
 
+router.get("/me", verifyToken, async (req: Request, res: Response) => {
+  const userId = req.userId;
+
+  try {
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "user not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
 export default router;
